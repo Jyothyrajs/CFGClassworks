@@ -1,0 +1,1 @@
+print("Welcome CFG Foundation with Git & Git Hub")
