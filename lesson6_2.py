@@ -134,7 +134,7 @@ import requests
 
 import pprint as pp
 
-API_key = 'e345ac6205e3940fde3f07f6de4a3c16'
+API_key = ""
 city_name = 'London'
 url = 'https://api.openweathermap.org/data/2.5/weather?q={city_name}&appid={API_key}'
 response = requests.get(url)
