@@ -28,3 +28,33 @@ def red_or_blue(num):
     if (is_even(num) and num >20) or num in [2,4]:
         return 'Blue'
 
+# Let's write a test for our function first and then will
+#  write an actual code to ensure that
+# all tests pass.
+#
+# Task
+# Given a list of dictionaries where keys are student's
+#  name and student's mark.
+# calculate the average score for the exam.
+#
+# If mark is not within the range 1 to 10, raise an error
+# Some mark values can be integers and some are strings,
+# we need to process both
+# If mark is missing, use value 5
+
+def average_exam_score(student_marks):
+    denominator = len(student_marks)
+    marks = []
+
+    for result in student_marks:
+        try:
+            mark = int(result['mark'])
+        except KeyError:
+            mark = 5
+
+        if not 10 > mark > 1:
+            raise ValueError("Mark value is not in the valid range")
+
+        marks.append(mark)
+
+    return sum(marks) / denominator

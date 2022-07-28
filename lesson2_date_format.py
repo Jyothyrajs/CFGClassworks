@@ -10,11 +10,24 @@ today_date = date.today()
 yr = (today_date.year) - age
 print(f"You born in {yr}")
 
+
+#Exercise My birthday
+from datetime import date
+import datetime
+import time
+birth_day = datetime.date(1984,3,14)
+this_birthday = birth_day.replace(year=date.today().year+1)
+days_to_go = date.today() - this_birthday
+print(days_to_go)
+print(datetime.tzinfo)
+
+
+
 #Example3 : Claculate no of pizzas you have to buy if 1 pizza shared by two members
 no_of_friends = int(input("Number of friends at your house"))
-Method1
+# Method1
 no_of_pizza = (no_of_friends+1)//2
-Method2
+# Method2
 if(no_of_friends%2 == 0):
     no_of_pizza = (no_of_friends//2)
 else:

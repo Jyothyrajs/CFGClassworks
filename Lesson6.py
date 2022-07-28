@@ -1,4 +1,4 @@
-#import wikipedia
+import wikipedia
 print(wikipedia.summary("PIP Python"))
 
 ### EXERCISE 1 ###
@@ -10,16 +10,37 @@ This API DOES NOT require authentication,
 TASK: Make a call to the API endpoint to get live information about astronauts in space
 
 """
+import requests
 
+url = "http://api.open-notify.org/iss-now.json"
+response = requests.get(url)
+data = response.json()
+print(data)
+
+import requests
+url = "http://api.open-notify.org/astros.json"
+response = requests.get(url)
+data = response.json()
+print(data['people'])
+for item in data['people']:
+    print(item['name'])
 
 
 ### EXERCISE 2 ###
 """
 TASK: Make a call with a 'PAYLOAD' (special requirements) to the API endpoint
 """
+import requests
+import pprint as pp
 
-
-
+url = "http://api.open-notify.org/iss-now.json"
+payload = {
+    "lat":9.70556,
+    "lon":76.34959
+}
+response = requests.get(url,payload)
+data = response.json()
+pp.pprint(data)
 
 ### EXERCISE 3 ###
 """
@@ -30,6 +51,22 @@ See what data you get back
 Convert the 'timestamp' from the response into readable date and time format
 Write a log to the new file that captures time and ISS's location.
 """
+import requests
+import pprint as pp
+from datetime import datetime
+
+url = "http://api.open-notify.org/iss-now.json"
+response = requests.get(url)
+data = response.json()
+pp.pprint(data['iss_position'])
+iss_time = datetime.fromtimestamp(data['timestamp'])
+print(iss_time)
+print(f"At  {iss_time} ISS passing at lat {data['iss_position']['latitude']} long {data['iss_position']['longitude']}")
+
+
+
+
+
 # import requests
 # from datetime import datetime
 # from pprint import pprint as pp
@@ -84,11 +121,35 @@ You can retrieve information about different Pokemon from urls
 https://pokeapi.co/api/v2/pokemon/6/
 """
 
+import requests
+import pprint as pp
 
+url = "https://pokeapi.co/api/v2/pokemon"
+response = requests.get(url)
+data = response.json()
+pp.pprint(data.keys())
+for d in data.items():
+    print(d)
 
+url = "https://pokeapi.co/api/v2/pokemon/3"
+response = requests.get(url)
+data = response.json()
+pp.pprint(data.keys())
+for d in data.keys():
+    if d == 'height':
+        print(data[d])
+pp.pprint(data['name'])
 ### EXERCISE 6 ###
 """
  Get the height and weight of a specific Pokemon and print the output
 
 !!! Extension !!!: Print the names of all of a specific Pokemon's moves
 """
+import requests
+import pprint as pp
+url = "https://pokeapi.co/api/v2/pokemon/3"
+response = requests.get(url)
+data = response.json()
+print(f"Moves of Pokemon:{data['name']}")
+for d in data['moves']:
+    print(d['move']['name'])

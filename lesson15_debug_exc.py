@@ -1,3 +1,51 @@
+
+# Demo assert
+
+"""
+Example 1
+GOOD INPUT: add_vat(vat=20, prices=[24, 0.15, 32.45, 0])
+BAD INPUT: add_vat(vat=20, prices=[24, 0.15, '10', 32.45])
+"""
+
+def add_vat(vat, prices):
+    """
+    Add commission to every price item in the provided iterable.
+
+    :param vat: float, vat percentage
+    :param prices: iterable, net prices as per customers' receipt
+    :return: list of prices with added vat
+    """
+    new_prices = [(price / 100 * vat) + price for price in prices]
+    return new_prices
+
+print(add_vat(vat=20, prices=[24, 0.15, '10', 32.45]))
+
+def apply_discount(product, discount):
+    """
+    Add a discount to the price.
+    :param product: dict obj, item spec including price
+    :param discount: float discount expressed in percent
+    :return: float new price
+    """
+    price = round(product['price'] * (1.0 - (discount / 100)), 2)
+    assert 0 <= price <= product['price'], "The discount price is incorrect"
+    return price
+
+
+### VALID INPUT (comment / uncomment  to use as necessary)###
+trainers = {'name': 'Running Trainers', 'price': 79.99}
+discount  = 200 #(represents 25%)
+print(apply_discount(trainers, discount))
+
+
+### INVALID INPUT (comment / uncomment to use  as necessary)###
+trainers = {'name': 'Running Trainers', 'price': 79.99}
+discount  = 200 #(represents 200%) --> Assertion Error will be raised
+print(apply_discount(trainers, discount))
+
+
+
+
 # #
 # # # EXAMPLE 1
 # denominator = int(input("Please enter a number to divide by: "))
@@ -61,32 +109,36 @@
 # New member name: Quinn, Harley and age 10
 #
 # """
-# def validate_fullname(fullname):
-#     if ',' not in fullname or len(fullname) <= 4:
-#         raise ValueError("Name not in correct format .. input comma bw names")
-#
-# def validateAge(age):
-#     if age < 14 or age > 19:
-#         raise ValueError("Age is to be in 14-19")
-# try:
-#     full_name = input("Enter your full name (lastname,firstname) : ")
-#     validate_fullname(full_name)
-#     age = input("Enter your age 14-19: ")
-#     validateAge(age)
-#     is_success = False
-#     with open ('registration.txt',"a+") as filep:
-#         filep.write(full_name)
-#         filep.write(age)
-#         filep.write("\n")
-# except ValueError:
-#     print("Yours is incorrect")
-# else:
-#     is_success = True
-# finally:
-#     if is_success:
-#         print("You are successfull")
-#
-#
+def validate_fullname(fullname):
+    if ',' not in fullname or len(fullname) <= 4:
+        raise ValueError("Name not in correct format .. input comma bw names")
+
+
+def validateAge(age):
+    if age < 14 or age > 19:
+        raise ValueError("Age is to be in 14-19")
+try:
+    is_success = False
+    full_name = input("Enter your full name (lastname,firstname) : ")
+    validate_fullname(full_name)
+    age = int(input("Enter your age 14-19: "))
+    validateAge(age)
+
+    with open ('registration.txt',"a+") as filep:
+        filep.write(full_name)
+        filep.write(str(age))
+        filep.write("\n")
+except ValueError as e:
+    print(f"Value incorrect {e}")
+except FileNotFoundError:
+    print("File not exist")
+else:
+    is_success = True
+finally:
+    if is_success:
+        print("You are successfull")
+
+
 #
 #
 
@@ -114,23 +166,23 @@ finally:
         print("Task failed")
 #
 # # #Example 2
-# class NumberIsNotINRange(ValueError):
-#     pass
-#
-# try:
-#     number = int(input("Enter Number in the range(1,5)"))
-#     if number > 5 or number < 1:
-#         raise NumberIsNotINRange
-#     result = 100/denominator
-#     print(result)
-#
-# except NumberIsNotINRange:
-#     print("Not in range")
-# except ValueError:
-#     print("Your number is not Valid")
-# except:
-#     print("Something went wrong")
-#
+class NumberIsNotINRange(ValueError):
+    pass
+
+try:
+    number = int(input("Enter Number in the range(1,5)"))
+    if number > 5 or number < 1:
+        raise NumberIsNotINRange
+    result = 100/denominator
+    print(result)
+
+except NumberIsNotINRange:
+    print("Not in range")
+except ValueError:
+    print("Your number is not Valid")
+except:
+    print("Something went wrong")
+
 # """
 # Example grading score - illustration only, not reflected real CFG grading scheme
 #

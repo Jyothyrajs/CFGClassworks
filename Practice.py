@@ -242,6 +242,12 @@ print(S[:-1])
 print(S[::-1])
 S = 'Code First Girls'
 print(S[::-1])
+
+S = 'Code First Girls'
+print(S[:-3:])
+
+print(S[:-3:-1])
+
 S = 'Hippopotamus'
 print(S[-7:-2])
 S = 'ABCDEFGHI'
@@ -341,3 +347,12 @@ uk_dt_str = uk_date.strftime('%m %d %Y')
 print(uk_dt_str)
 us_date = dt.datetime.strptime(uk_dt_str,'%m %d %Y')
 print(us_date)
+
+
+mystr = "Hello I am also a CFG student Now"
+print(mystr.rsplit('a',4))
+
+mydict ={'item1':10,"item2":5,"item3":25,"item4":"Pen"}
+print(mydict.setdefault("item6",200))
+x =mydict.setdefault("item2",500)
+print(x)

@@ -162,7 +162,6 @@ pp.pprint(data['name'])
 pp.pprint(data['height'])
 pp.pprint(data['weight'])
 
-
 ### EXERCISE 6 ###
 """
  Get the height and weight of a specific Pokemon and print the output
@@ -179,3 +178,25 @@ moves = (data['moves'])
 
 for i in range(len(moves)):
     pp.pprint(moves[i]['move']['name'])
+
+
+# Extension for astros
+import requests
+import pprint as pp
+
+url = 'http://api.open-notify.org/astros.json'
+response = requests.get(url)
+print(response.status_code)
+data = response.json()
+for person in data['people']:
+	print (data)
+for person in data['people']:
+	print(data['people'])
+#
+# crafts = set()
+# with open('astro_list.txt', 'w') as my_file:
+# 	for person in data['people']:
+# 		my_file.write(person['name'] + 'is in spacecraft ' + person['craft'] +'\n')
+#     	crafts.add(person['craft'])
+# print(my_file)
+# print('There are ' + str(len(crafts)) + ' types of crafts in space right now: ' + str(crafts))

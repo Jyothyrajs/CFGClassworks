@@ -11,8 +11,8 @@ file.close()
 
 file = open('5.3_example_one.txt','r')
 print("With for loop")
-for i in range(2):
-    print(file.readline())
+for i in range(4):
+    print(i,file.readline())
 
 
 file = open('5.3_example_one.txt','r')
@@ -125,3 +125,28 @@ with open('todo.txt', 'r') as file:
     contents = file.readlines()
     for item in contents:
         print(item)
+
+#Find the word count in a file
+
+word = "file"
+count = 0
+with open("lesson5.py",'r') as fp:
+    for line in fp.readlines():
+        if word in line:
+            count = count+1
+print(count)
+
+word = "Git".lower()
+count = 0
+with open("hello.py",'r') as fp:
+    for line in fp.readlines():
+        print(line)
+        line = line.lower()
+        for char in '!"#$%&\'()*+,-./:;<=>?@[\\]^_`{|}~':
+            line = line.replace(char," ")
+        words = line.split()
+        print(words)
+        for w in words:
+            if w==word:
+                count = count+1
+print(count)
